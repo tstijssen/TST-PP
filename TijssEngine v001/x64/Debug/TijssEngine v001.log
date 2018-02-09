@@ -1,0 +1,2 @@
+﻿Graphics.obj : error LNK2019: unresolved external symbol D2D1CreateFactory referenced in function "long __cdecl D2D1CreateFactory(enum D2D1_FACTORY_TYPE,struct _GUID const &,void * *)" (?D2D1CreateFactory@@YAJW4D2D1_FACTORY_TYPE@@AEBU_GUID@@PEAPEAX@Z)
+C:\Users\tstijssen\Documents\Masters Game - Copy (2)\TST-PP\x64\Debug\TijssEngine v001.exe : fatal error LNK1120: 1 unresolved externals

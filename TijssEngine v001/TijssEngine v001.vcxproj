@@ -123,6 +123,8 @@
   <ItemGroup>
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="EngineManager.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="EntityManager.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Sprite.h" />

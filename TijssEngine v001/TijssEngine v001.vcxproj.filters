@@ -19,6 +19,9 @@
     <Filter Include="Render">
       <UniqueIdentifier>{3086ffc7-b7b4-4595-853b-2ca99e030937}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{40857a7d-e0ec-4e10-9a20-01ea489cb7c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -55,6 +58,12 @@
     </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.h">
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
