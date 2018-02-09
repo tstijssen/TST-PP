@@ -1,0 +1,16 @@
+﻿  Main.cpp
+f:\users\c-drive\github\tst-pp\tijssengine v001\graphics.h(43): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
+f:\users\c-drive\github\tst-pp\tijssengine v001\graphics.h(48): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
+  Input.cpp
+  Graphics.cpp
+f:\users\c-drive\github\tst-pp\tijssengine v001\graphics.h(43): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
+f:\users\c-drive\github\tst-pp\tijssengine v001\graphics.h(48): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
+f:\users\c-drive\github\tst-pp\tijssengine v001\graphics.cpp(110): warning C4101: 'pszFileName': unreferenced local variable
+  EngineManager.cpp
+f:\users\c-drive\github\tst-pp\tijssengine v001\graphics.h(43): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
+f:\users\c-drive\github\tst-pp\tijssengine v001\graphics.h(48): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
+f:\users\c-drive\github\tst-pp\tijssengine v001\enginemanager.cpp(21): warning C4101: 'result': unreferenced local variable
+  Bitmap.cpp
+  Generating Code...
+Graphics.obj : error LNK2019: unresolved external symbol D2D1CreateFactory referenced in function "long __cdecl D2D1CreateFactory(enum D2D1_FACTORY_TYPE,struct _GUID const &,void * *)" (?D2D1CreateFactory@@YAJW4D2D1_FACTORY_TYPE@@AEBU_GUID@@PEAPEAX@Z)
+F:\Users\C-Drive\GitHub\TST-PP\x64\Debug\TijssEngine v001.exe : fatal error LNK1120: 1 unresolved externals
