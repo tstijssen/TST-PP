@@ -39,6 +39,9 @@
     <ClCompile Include="Input.cpp">
       <Filter>Render</Filter>
     </ClCompile>
+    <ClCompile Include="Messenger.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ThreadPool.h">
@@ -64,6 +67,15 @@
     </ClInclude>
     <ClInclude Include="EntityManager.h">
       <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Messenger.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityComponent.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityDefines.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
