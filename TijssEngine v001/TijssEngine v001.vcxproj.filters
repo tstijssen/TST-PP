@@ -27,19 +27,19 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EngineManager.cpp">
+    <ClCompile Include="Render\Bitmap.cpp">
       <Filter>Render</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.cpp">
+    <ClCompile Include="Render\EngineManager.cpp">
       <Filter>Render</Filter>
     </ClCompile>
-    <ClCompile Include="Bitmap.cpp">
+    <ClCompile Include="Render\Graphics.cpp">
       <Filter>Render</Filter>
     </ClCompile>
-    <ClCompile Include="Input.cpp">
+    <ClCompile Include="Render\Input.cpp">
       <Filter>Render</Filter>
     </ClCompile>
-    <ClCompile Include="Messenger.cpp">
+    <ClCompile Include="Entities\Messenger.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,35 +47,38 @@
     <ClInclude Include="ThreadPool.h">
       <Filter>Threading</Filter>
     </ClInclude>
-    <ClInclude Include="EngineManager.h">
+    <ClInclude Include="Render\Bitmap.h">
       <Filter>Render</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics.h">
+    <ClInclude Include="Render\EngineManager.h">
       <Filter>Render</Filter>
     </ClInclude>
-    <ClInclude Include="Input.h">
+    <ClInclude Include="Render\Graphics.h">
       <Filter>Render</Filter>
     </ClInclude>
-    <ClInclude Include="Bitmap.h">
+    <ClInclude Include="Render\Input.h">
       <Filter>Render</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
+    <ClInclude Include="Render\Sprite.h">
       <Filter>Render</Filter>
     </ClInclude>
-    <ClInclude Include="Entity.h">
+    <ClInclude Include="Render\Window.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Entity.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="EntityManager.h">
+    <ClInclude Include="Entities\EntityComponent.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Messenger.h">
+    <ClInclude Include="Entities\EntityDefines.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="EntityComponent.h">
+    <ClInclude Include="Entities\EntityManager.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="EntityDefines.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Entities\Messenger.h">
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

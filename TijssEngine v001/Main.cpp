@@ -16,7 +16,9 @@
 #include <dwrite.h>
 #include <wincodec.h>
 
-#include "EngineManager.h"
+#include "Render\EngineManager.h"
+#include <SFML\Audio.hpp>
+
 
 #ifndef Assert
 #if defined( DEBUG ) || defined( _DEBUG )
@@ -39,7 +41,7 @@ int WINAPI WinMain(
 	// The return value is ignored, because we want to continue running in the
 	// unlikely event that HeapSetInformation fails.
 	HeapSetInformation(NULL, HeapEnableTerminationOnCorruption, NULL, 0);
-
+	
 	int width = 1920;
 	int height = 1080;
 
