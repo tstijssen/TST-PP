@@ -43,5 +43,5 @@ private:
 	HWND m_hwnd;
 
 	std::unique_ptr<InputClass> m_Input;
-	std::unique_ptr<GraphicsClass> m_Graphics = std::make_unique<GraphicsClass>();
+	GraphicsClass* m_Graphics;
 };

@@ -42,7 +42,7 @@ namespace ent
 	class CMessenger
 	{
 	public:
-		CMessenger();
+		/*CMessenger();*/
 
 		// interface
 		void SendMessage(TEntityUID to, const SMessage& msg);

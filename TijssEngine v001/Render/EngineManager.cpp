@@ -13,6 +13,7 @@ TijssEngine::TijssEngine(const TijssEngine& other) : m_hwnd(NULL)
 
 TijssEngine::~TijssEngine()
 {
+	delete m_Graphics;
 }
 
 void TijssEngine::RunMessageLoop()
@@ -193,7 +194,7 @@ LRESULT CALLBACK TijssEngine::WndProc(HWND hwnd, UINT message, WPARAM wParam, LP
 			wasHandled = true;
 			break;
 
-			case WM_KEYDOWN:
+			/*case WM_KEYDOWN:*/
 				switch (wParam)
 				{
 				case VK_ESCAPE:

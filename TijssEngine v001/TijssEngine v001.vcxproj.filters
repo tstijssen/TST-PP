@@ -62,9 +62,6 @@
     <ClInclude Include="Render\Sprite.h">
       <Filter>Render</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Window.h">
-      <Filter>Render</Filter>
-    </ClInclude>
     <ClInclude Include="Entities\Entity.h">
       <Filter>Entities</Filter>
     </ClInclude>

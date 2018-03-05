@@ -1,5 +1,5 @@
 #pragma once
-
+#pragma comment(lib, "d2d1")
 #include <Windows.h>
 #include <d2d1.h>
 

@@ -4,7 +4,7 @@
 namespace ent
 {
 	// global messager object for all
-	CMessenger Messenger;
+	/*CMessenger Messenger;*/
 
 	// send receive
 	void CMessenger::SendMessage(TEntityUID to, const SMessage& msg)

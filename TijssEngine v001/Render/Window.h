@@ -62,6 +62,7 @@ HRESULT WindowClass::Initialize(char* windowName = "TijssEngine", int screenWidt
 
 	// Initialize device-indpendent resources, such
 	// as the Direct2D factory.
+	
 	hr = CreateDeviceIndependentResources();
 
 	if (SUCCEEDED(hr))

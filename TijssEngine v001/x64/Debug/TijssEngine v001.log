@@ -1,5 +1,8 @@
-﻿  Messenger.cpp
-Messenger.obj : error LNK2019: unresolved external symbol "public: __cdecl ent::CMessenger::CMessenger(void)" (??0CMessenger@ent@@QEAA@XZ) referenced in function "void __cdecl ent::`dynamic initializer for 'Messenger''(void)" (??__EMessenger@ent@@YAXXZ)
-Graphics.obj : error LNK2019: unresolved external symbol D2D1CreateFactory referenced in function "long __cdecl D2D1CreateFactory(enum D2D1_FACTORY_TYPE,struct _GUID const &,void * *)" (?D2D1CreateFactory@@YAJW4D2D1_FACTORY_TYPE@@AEBU_GUID@@PEAPEAX@Z)
-C:\Users\tstijssen\Documents\Masters Game - Copy (2)\TST-PP\TijssEngine v001\Sound\SFML-2.4.2\lib\sfml-audio-d.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
-C:\Users\tstijssen\Documents\Masters Game - Copy (2)\TST-PP\x64\Debug\TijssEngine v001.exe : fatal error LNK1120: 2 unresolved externals
+﻿  EngineManager.cpp
+f:\users\c-drive\github\tst-pp\tijssengine v001\render\graphics.h(43): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
+f:\users\c-drive\github\tst-pp\tijssengine v001\render\graphics.h(48): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
+f:\users\c-drive\github\tst-pp\tijssengine v001\render\enginemanager.cpp(22): warning C4101: 'result': unreferenced local variable
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  Main.cpp
+  TijssEngine v001.vcxproj -> F:\Users\C-Drive\GitHub\TST-PP\x64\Debug\TijssEngine v001.exe
