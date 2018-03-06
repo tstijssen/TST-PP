@@ -1,12 +1,6 @@
 ﻿  Input.cpp
-  EngineManager.cpp
-f:\tijssengine v001\tijssengine v001\graphics.h(43): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
-f:\tijssengine v001\tijssengine v001\graphics.h(48): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
-f:\tijssengine v001\tijssengine v001\enginemanager.cpp(21): warning C4101: 'result': unreferenced local variable
   Generating Code...
   Compiling...
   Main.cpp
-f:\tijssengine v001\tijssengine v001\graphics.h(43): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
-f:\tijssengine v001\tijssengine v001\graphics.h(48): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
   Generating Code...
   TijssEngine v001.vcxproj -> F:\TijssEngine v001\Debug\TijssEngine v001.exe

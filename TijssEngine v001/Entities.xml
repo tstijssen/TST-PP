@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!-- Level Setup -->
+<Level>
+
+  <!-- Entity Templates -->
+  <Templates>
+
+    <!-- Behaviour Types -->
+    
+    <!-- Environment Types -->
+    <EntityTemplate Type="Scenery" Name="ShadowSprite" Mesh="shadow.png"/>
+    <!--<EntityTemplate Type="Generic" Name="Floor" Mesh="Floor.x"/>-->
+
+  </Templates>
+  <!-- End of Entity Types -->
+
+  
+  <!-- Scene Setup -->
+  <Entities>
+
+    <!-- Environment Positions -->
+    <Entity Type="ShadowSprite" Name="AnimGuy">
+      <Position X="0" Y="0" Z="0"/>
+      <AnimationData X ="80" Y="70" Frames="14"/>
+    </Entity>
+    <!--<Entity Type="Floor" Name="Floor">
+      <Position X="0.0" Y="-0.4" Z="0.0"/>
+      <Scale X="20.0" Y="20.0" Z="20.0"/>
+    </Entity>-->
+    
+  </Entities>
+  <!-- End of Scene Setup -->
+  
+</Level>

@@ -1,0 +1,13 @@
+﻿  GameController.cpp
+  GameLevel.cpp
+  Graphics.cpp
+  Level1.cpp
+  Main.cpp
+  SpriteSheet.cpp
+SpriteSheet.cpp(56): warning C4244: '=': conversion from 'FLOAT' to 'int', possible loss of data
+SpriteSheet.cpp(57): warning C4244: '=': conversion from 'FLOAT' to 'int', possible loss of data
+SpriteSheet.cpp(98): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+  Generating code
+  All 99 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  TijssEngine v001.vcxproj -> F:\TijssEngine v001\Release\TijssEngine v001.exe

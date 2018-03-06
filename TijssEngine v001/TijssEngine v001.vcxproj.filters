@@ -19,63 +19,59 @@
     <Filter Include="Render">
       <UniqueIdentifier>{3086ffc7-b7b4-4595-853b-2ca99e030937}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Entities">
-      <UniqueIdentifier>{40857a7d-e0ec-4e10-9a20-01ea489cb7c8}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Render\Bitmap.cpp">
+    <ClCompile Include="Graphics.cpp">
       <Filter>Render</Filter>
     </ClCompile>
-    <ClCompile Include="Render\EngineManager.cpp">
+    <ClCompile Include="GameController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Level1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteSheet.cpp">
       <Filter>Render</Filter>
     </ClCompile>
-    <ClCompile Include="Render\Graphics.cpp">
-      <Filter>Render</Filter>
+    <ClCompile Include="GameLevel.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Render\Input.cpp">
-      <Filter>Render</Filter>
-    </ClCompile>
-    <ClCompile Include="Entities\Messenger.cpp">
-      <Filter>Entities</Filter>
+    <ClCompile Include="Input.cpp">
+      <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ThreadPool.h">
       <Filter>Threading</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Bitmap.h">
+    <ClInclude Include="Graphics.h">
       <Filter>Render</Filter>
     </ClInclude>
-    <ClInclude Include="Render\EngineManager.h">
+    <ClInclude Include="Game.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameController.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Level1.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteSheet.h">
       <Filter>Render</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Graphics.h">
-      <Filter>Render</Filter>
+    <ClInclude Include="KeyDefines.h">
+      <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Input.h">
-      <Filter>Render</Filter>
+    <ClInclude Include="Input.h">
+      <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Sprite.h">
-      <Filter>Render</Filter>
-    </ClInclude>
-    <ClInclude Include="Entities\Entity.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Entities\EntityComponent.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Entities\EntityDefines.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Entities\EntityManager.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Entities\Messenger.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Entities.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
   </ItemGroup>
 </Project>
