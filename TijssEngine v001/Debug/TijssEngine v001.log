@@ -1,6 +1,11 @@
-﻿  Input.cpp
+﻿  GameController.cpp
   Generating Code...
   Compiling...
   Main.cpp
   Generating Code...
+  Skipping... (no relevant changes detected)
+  SpriteSheet.cpp
+  SpriteManager.cpp
+  Level1.cpp
+  GameLevel.cpp
   TijssEngine v001.vcxproj -> F:\TijssEngine v001\Debug\TijssEngine v001.exe

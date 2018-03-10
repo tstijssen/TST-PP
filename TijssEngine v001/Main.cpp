@@ -107,6 +107,7 @@ int WINAPI WinMain(
 		return -1;
 	}
 	GameLevel::Init(graphics);
+	SpriteSheet::FolderInit("Media");
 
 	ShowWindow(windowHandle, nCmdShow);
 

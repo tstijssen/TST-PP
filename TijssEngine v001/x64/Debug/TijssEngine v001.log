@@ -1,8 +1,18 @@
-﻿  EngineManager.cpp
-f:\users\c-drive\github\tst-pp\tijssengine v001\render\graphics.h(43): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
-f:\users\c-drive\github\tst-pp\tijssengine v001\render\graphics.h(48): warning C4244: 'return': conversion from 'FLOAT' to 'int', possible loss of data
-f:\users\c-drive\github\tst-pp\tijssengine v001\render\enginemanager.cpp(22): warning C4101: 'result': unreferenced local variable
-  Generating Code...
-  Skipping... (no relevant changes detected)
+﻿  SpriteSheet.cpp
+c:\users\tstijssen\documents\github\tst-pp\tijssengine v001\spritesheet.cpp(56): warning C4244: '=': conversion from 'FLOAT' to 'int', possible loss of data
+c:\users\tstijssen\documents\github\tst-pp\tijssengine v001\spritesheet.cpp(57): warning C4244: '=': conversion from 'FLOAT' to 'int', possible loss of data
+c:\users\tstijssen\documents\github\tst-pp\tijssengine v001\spritesheet.cpp(87): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+c:\users\tstijssen\documents\github\tst-pp\tijssengine v001\spritesheet.cpp(100): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+c:\users\tstijssen\documents\github\tst-pp\tijssengine v001\spritesheet.cpp(109): error C2572: 'SpriteSheet::Move': redefinition of default argument: parameter 1
+  c:\users\tstijssen\documents\github\tst-pp\tijssengine v001\spritesheet.h(23): note: see declaration of 'SpriteSheet::Move'
+c:\users\tstijssen\documents\github\tst-pp\tijssengine v001\spritesheet.cpp(116): error C2572: 'SpriteSheet::SetPosition': redefinition of default argument: parameter 1
+  c:\users\tstijssen\documents\github\tst-pp\tijssengine v001\spritesheet.h(24): note: see declaration of 'SpriteSheet::SetPosition'
   Main.cpp
-  TijssEngine v001.vcxproj -> F:\Users\C-Drive\GitHub\TST-PP\x64\Debug\TijssEngine v001.exe
+c:\users\tstijssen\documents\github\tst-pp\tijssengine v001\level1.h(3): fatal error C1083: Cannot open include file: 'SFML\Audio.hpp': No such file or directory
+  Level1.cpp
+c:\users\tstijssen\documents\github\tst-pp\tijssengine v001\level1.h(3): fatal error C1083: Cannot open include file: 'SFML\Audio.hpp': No such file or directory
+  Input.cpp
+  Graphics.cpp
+  GameLevel.cpp
+  GameController.cpp
+  Generating Code...
