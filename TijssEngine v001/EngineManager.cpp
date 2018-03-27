@@ -1,253 +1,205 @@
 #include "EngineManager.h"
-#include <windowsx.h> // for key inputs
 
-TijssEngine::TijssEngine() : m_hwnd(NULL)
+namespace Tijss
 {
-	
-}
+	cEngine* cEngine::m_EngineInst = NULL;
 
-TijssEngine::TijssEngine(const TijssEngine& other) : m_hwnd(NULL)
-{
-}
-
-
-TijssEngine::~TijssEngine()
-{
-}
-
-void TijssEngine::RunMessageLoop()
-{
-	MSG msg;
-	bool running, result;
-
-	ZeroMemory(&msg, sizeof(MSG));
-
-	running = false;
-
-	while (!running)
+	cEngine* cEngine::GetInstance()
 	{
-		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		if (m_EngineInst)
 		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-		}
-
-		if (msg.message == WM_QUIT)
-		{
-			running = true;
+			return m_EngineInst;
 		}
 		else
 		{
-			// frame handling
+			// error
 		}
+		return NULL;
+	}
 
-		if (m_Input)
+	cWindow* cEngine::GetWindow()
+	{
+		return m_Window;
+	}
+
+	cEngine::cEngine()
+	{
+		m_GFX = nullptr;
+		m_Context = nullptr;
+		m_Device = nullptr;
+		m_Window = nullptr;
+		m_Camera2D = nullptr;
+		m_Camera3D = nullptr;
+		//m_RootScene = nullptr;
+
+		if (m_EngineInst)
 		{
-			if (m_Input->IsKeyPressed(0) == true)
-			{
-				running = true;
-			}
+			// error, engine already exists
+			return;
 		}
+		m_EngineInst = this;
 	}
 
-	if (m_Graphics)
+	void cEngine::Init(EngineDescription pEngineOptions)
 	{
-		m_Graphics->TemporaryMovePosition(D2D_VECTOR_3F{ 1, 0, 0 });
-		m_Graphics->OnRender(m_hwnd);
-	}
-	//while (GetMessage(&msg, NULL, 0, 0))
-	//{
-		//TranslateMessage(&msg);
-		//DispatchMessage(&msg);
-	//}
-}
+		m_Window = pEngineOptions._Window;
+		m_Camera2D = pEngineOptions._Camera2D;
+		m_Camera3D = pEngineOptions._Camera3D;
 
-bool TijssEngine::Initialize(int& screenWidth, int& screenHeight)
-{
-	// initialize graphics class
-	m_Graphics->Initialize(screenWidth, screenHeight);
+		//if (!pEngineOptions.Test())
+		//	Log::Error("Engine::Initialize: EngineDescription Failed");
 
-	InitializeWindows(screenWidth, screenHeight);
+		// Graphics block
 
-	// initialize input class
-	//m_Input = std::make_unique<InputClass>();
-	//m_Input->Initialize(m_hinstance, m_hwnd, screenWidth, screenHeight);
+		m_GFX = new cGraphics();
+		m_GFX->Init(m_Window, pEngineOptions._Windowed, pEngineOptions._VSync);
+		m_Context = m_GFX->GetContext();
+		m_Device = m_GFX->GetDevice();
 
-	return true;
-}
+		//m_DefaultShaderBase.LoadShaders();
 
-void TijssEngine::InitializeWindows(int& screenWidth, int& screenHeight, char* windowName)
-{
-	
-	HRESULT hr;
-	m_hinstance = HINST_THISCOMPONENT;
-	// Register the window class.
-	WNDCLASSEX wcex = { sizeof(WNDCLASSEX) };
-	wcex.style = CS_HREDRAW | CS_VREDRAW;
-	wcex.lpfnWndProc = TijssEngine::WndProc;
-	wcex.cbClsExtra = 0;
-	wcex.cbWndExtra = sizeof(LONG_PTR);
-	wcex.hInstance = m_hinstance;
-	wcex.hbrBackground = NULL;
-	wcex.lpszMenuName = NULL;
-	wcex.hCursor = LoadCursor(NULL, IDI_APPLICATION);
-	wcex.lpszClassName = "D2DDemoApp";
-
-	RegisterClassEx(&wcex);
-
-
-	// Because the CreateWindow function takes its size in pixels,
-	// obtain the system DPI and use it to scale the window size.
-
-	D2D_VECTOR_2F dpi = m_Graphics->GetDPI();
-	// The factory returns the current system DPI. This is also the value it will use
-	// to create its own windows.
-
-
-	// Create the window.
-	m_hwnd = CreateWindow(
-		"D2DDemoApp",
-		windowName,
-		WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT,
-		CW_USEDEFAULT,
-		static_cast<UINT>(ceil(screenWidth * dpi.x / 96.f)),
-		static_cast<UINT>(ceil(screenHeight * dpi.y / 96.f)),
-		NULL,
-		NULL,
-		m_hinstance,
-		this
-	);
-	hr = m_hwnd ? S_OK : E_FAIL;
-	if (SUCCEEDED(hr))
-	{
-		ShowWindow(m_hwnd, SW_SHOWNORMAL);
-		UpdateWindow(m_hwnd);
+		//Log::Success("Engine::Initialized.");
 	}
 
-}
-
-LRESULT CALLBACK TijssEngine::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-	LRESULT result = 0;
-
-	if (message == WM_CREATE)
+	Camera* Engine::GetActive2DCamera()
 	{
-		LPCREATESTRUCT pcs = (LPCREATESTRUCT)lParam;
-		TijssEngine *pTijssEngine = (TijssEngine *)pcs->lpCreateParams;
-
-		::SetWindowLongPtrW(
-			hwnd,
-			GWLP_USERDATA,
-			PtrToUlong(pTijssEngine)
-		);
-
-		result = 1;
-	}
-	else
-	{
-		TijssEngine *pTijssEngine = reinterpret_cast<TijssEngine *>(static_cast<LONG_PTR>(
-			::GetWindowLongPtrW(
-				hwnd,
-				GWLP_USERDATA
-			)));
-
-		bool wasHandled = false;
-
-		if (pTijssEngine)
+		if (Me)
 		{
-			switch (message)
+			if (Me->mCamera2D)
 			{
-			case WM_SIZE:
-			{
-				UINT width = LOWORD(lParam);
-				UINT height = HIWORD(lParam);
-				pTijssEngine->m_Graphics->OnResize(width, height);
+				return Me->mCamera2D;
 			}
-			result = 0;
-			wasHandled = true;
-			break;
-
-			case WM_DISPLAYCHANGE:
+			else
 			{
-				InvalidateRect(hwnd, NULL, FALSE);
-			}
-			result = 0;
-			wasHandled = true;
-			break;
-
-			case WM_PAINT:
-			{
-				pTijssEngine->m_Graphics->OnRender(pTijssEngine->m_hwnd);
-				ValidateRect(hwnd, NULL);
-			}
-			result = 0;
-			wasHandled = true;
-			break;
-
-			case WM_DESTROY:
-			{
-				PostQuitMessage(0);
-			}
-			result = 1;
-			wasHandled = true;
-			break;
-
-			case WM_KEYDOWN:
-				switch (wParam)
-				{
-				case VK_ESCAPE:
-					//PostQuitMessage(0);
-					//result = 1;
-					break;
-				case VK_RIGHT:
-					// move right
-					if (pTijssEngine->m_Graphics->TemporaryGetX() < 1850)
-					{
-						pTijssEngine->m_Graphics->TemporaryMovePosition(D2D_VECTOR_3F{ 5, 0, 0 });
-						pTijssEngine->m_Graphics->OnRender(pTijssEngine->m_hwnd);
-						ValidateRect(hwnd, NULL);
-					}
-					break;
-				case VK_LEFT:
-					// move left
-					if (pTijssEngine->m_Graphics->TemporaryGetX() > 0)
-					{
-						pTijssEngine->m_Graphics->TemporaryMovePosition(D2D_VECTOR_3F{ -5, 0, 0 });
-						pTijssEngine->m_Graphics->OnRender(pTijssEngine->m_hwnd);
-						ValidateRect(hwnd, NULL);
-					}
-					break;
-				case VK_UP:
-					// move up
-					if (pTijssEngine->m_Graphics->TemporaryGetY() > 0)
-					{
-						pTijssEngine->m_Graphics->TemporaryMovePosition(D2D_VECTOR_3F{ 0, -5, 0 });
-						pTijssEngine->m_Graphics->OnRender(pTijssEngine->m_hwnd);
-						ValidateRect(hwnd, NULL);
-					}
-					break;
-				case VK_DOWN:
-					// move down
-					if (pTijssEngine->m_Graphics->TemporaryGetY() < 945)
-					{
-						pTijssEngine->m_Graphics->TemporaryMovePosition(D2D_VECTOR_3F{ 0, 5, 0 });
-						pTijssEngine->m_Graphics->OnRender(pTijssEngine->m_hwnd);
-						ValidateRect(hwnd, NULL);
-					}
-					break;
-				}
-				break;
-
+				Log::Error("Engine::GetActive2DCamera - Camera2D is null");
 			}
 		}
+		else
+			Log::Error("Engine::GetActive2DCamera - engine is not created.");
 
-
-		if (!wasHandled)
-		{
-			result = DefWindowProc(hwnd, message, wParam, lParam);
-		}
+		return NULL;
 	}
 
-	return result;
+
+
+	Camera* Engine::GetActive3DCamera()
+	{
+		if (Me)
+		{
+			if (Me->mCamera3D)
+			{
+				return Me->mCamera3D;
+			}
+			else
+			{
+				Log::Error("Engine::GetActive3DCamera - Camera3D is null");
+			}
+		}
+		else
+			Log::Error("Engine::GetActive3DCamera - engine is not created.");
+
+		return NULL;
+	}
+
+	ID3D11Device* Engine::GetDevice()
+	{
+		if (Me)
+		{
+			if (Me->Device)
+			{
+				return Me->Device;
+			}
+			else
+			{
+				Log::Error("Engine::GetDevice - Device is null");
+			}
+		}
+		else
+			Log::Error("Engine::GetDevice - engine is not created.");
+
+		return NULL;
+	}
+
+
+
+	ID3D11DeviceContext* Engine::GetContext()
+	{
+		if (Me)
+		{
+			if (Me->Context)
+			{
+				return Me->Context;
+			}
+			else
+			{
+				Log::Error("Engine::GetContext - Context is null");
+			}
+		}
+		else
+			Log::Error("Engine::GetContext - engine is not created.");
+
+		return NULL;
+	}
+
+
+
+	void Engine::SetActiveCamera2D(Camera *inCamera)
+	{
+		mCamera2D = inCamera;
+	}
+
+
+	void Engine::SetActiveCamera3D(Camera *inCamera)
+	{
+		mCamera3D = inCamera;
+	}
+
+
+	void Engine::Draw()
+	{
+		if (mCamera2D)
+			mCamera2D->Update();
+
+		if (mCamera3D)
+			mCamera3D->Update();
+
+		if (mRootScene)
+			mRootScene->Draw();
+	}
+
+
+	void Engine::Update()
+	{
+		if (mRootScene)
+			mRootScene->Update();
+	}
+
+
+	void Engine::Release()
+	{
+
+		mDefaultShaderBase.ReleaseShaders();
+
+		_RELEASE_DELETE(mGraphics);
+
+		Context = nullptr;
+		Device = nullptr;
+		mWindow = nullptr;
+		mCamera2D = nullptr;
+		mCamera3D = nullptr;
+		mRootScene = nullptr;
+
+		Log::Success("Engine - Released");
+	}
+
+	Engine::~Engine()
+	{
+		Me = nullptr;
+	}
+
+	void Engine::SetRootScene(Scene* pScene)
+	{
+		mRootScene = pScene;
+	}
+
 }

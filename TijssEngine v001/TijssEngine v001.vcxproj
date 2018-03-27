@@ -69,7 +69,14 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
+    <LibraryPath>$(LibraryPath);$(DXSDK_DIR)Lib\x64</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LibraryPath>$(LibraryPath);$(DXSDK_DIR)Lib\x64</LibraryPath>
+    <IncludePath>$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -119,6 +126,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="EngineManager.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="GameLevel.cpp" />
     <ClCompile Include="Graphics.cpp" />
@@ -128,18 +138,29 @@
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SpriteManager.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="EngineDefines.h" />
+    <ClInclude Include="EngineManager.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameController.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="HPTimer.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="KeyDefines.h" />
     <ClInclude Include="Level1.h" />
+    <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SpriteSheet.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="TypeDefines.h" />
+    <ClInclude Include="Window.h" />
+    <ClInclude Include="_DLLExport.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Entities.xml" />

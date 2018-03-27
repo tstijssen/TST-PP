@@ -19,6 +19,12 @@
     <Filter Include="Render">
       <UniqueIdentifier>{3086ffc7-b7b4-4595-853b-2ca99e030937}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{7e4cd814-90bc-43b2-8640-0a63eb2dcde4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{7c03b210-76b8-48cd-9815-a9d914ac30bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -28,9 +34,6 @@
       <Filter>Render</Filter>
     </ClCompile>
     <ClCompile Include="GameController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Level1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SpriteSheet.cpp">
@@ -48,6 +51,21 @@
     <ClCompile Include="SpriteManager.cpp">
       <Filter>Render</Filter>
     </ClCompile>
+    <ClCompile Include="Level1.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineManager.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ThreadPool.h">
@@ -60,9 +78,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="GameController.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Level1.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="SpriteSheet.h">
@@ -79,6 +94,39 @@
     </ClInclude>
     <ClInclude Include="TypeDefines.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HPTimer.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Level1.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectPool.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="_DLLExport.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineManager.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineDefines.h">
+      <Filter>Render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

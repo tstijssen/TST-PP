@@ -91,7 +91,7 @@ int WINAPI WinMain(
 
 	RegisterClassEx(&windowClass);
 
-	RECT rect = {0,0, 800, 600};
+	RECT rect = {0,0, 1280, 980};
 	AdjustWindowRectEx(&rect, WS_OVERLAPPEDWINDOW, false, WS_EX_OVERLAPPEDWINDOW);
 
 	HWND windowHandle = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, "MainWindow", "TijssEngine!", WS_OVERLAPPEDWINDOW, 100, 100, 
@@ -106,8 +106,9 @@ int WINAPI WinMain(
 		delete graphics;
 		return -1;
 	}
+	GameController::Init();
 	GameLevel::Init(graphics);
-	SpriteSheet::FolderInit("Media");
+	SpriteManager::FolderInit("Media");
 
 	ShowWindow(windowHandle, nCmdShow);
 

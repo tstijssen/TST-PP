@@ -3,6 +3,7 @@
 #include <wincodec.h>
 #include "TypeDefines.h"
 #include "Graphics.h"
+#include "ThreadPool.h"
 
 namespace CollisionType
 {
@@ -11,41 +12,53 @@ namespace CollisionType
 
 class SpriteSheet;
 
-namespace smanager
+class SpriteManager
 {
-	class SpriteManager
+public:
+	SpriteManager(Graphics* gfx);
+	~SpriteManager();
+
+	// no built in collision resolutions
+	SpriteSheet* DetectCollisions(SpriteSheet* sprite);
+	SpriteSheet* DetectMouseCollisions(Vector2 mousePos, int32 layer);
+	bool OnMouse(Vector2 mousePos, SpriteSheet* sprite);
+
+	SpriteSheet* AddSprite(string fileName, int layer = 0, CollisionType::Type collider = CollisionType::None, Vector2 position = {0,0}, bool isIsometric = false);
+
+	static void FolderInit(string spriteFolderPath)
 	{
-	public:
+		m_FolderPath = spriteFolderPath + "\\";
+	}
 
-		static SpriteManager& instance()
-		{
-			if(!m_Instance)
-				m_Instance = new SpriteManager;
-			return *m_Instance;
-		}
+	void Draw(double frameTime);
+	void RemoveSprite(int layer);
 
-		bool DetectCollisions(int index);
-
-		int AddSprite(SpriteSheet* newSprite);
-
-		void RemoveSprite(int index);
-
-	private:
-		std::vector<SpriteSheet*> m_AllSprites;
-		static SpriteManager *m_Instance;
-		SpriteManager() {};
+private:
+	// layerstest
+	struct spriteLayer
+	{
+		std::vector<SpriteSheet*> sprites;
+		ID2D1Layer * renderLayer = NULL;
+		bool active;
+		bool isIsomentric;
+		bool hasMoved;
 	};
+
+	std::vector<spriteLayer> WorldSprites;
+	static string m_FolderPath;
+	Graphics* gfx;
 };
 
 class SpriteSheet
 {
-	Graphics* gfx;
+	friend class SpriteManager;
 	ID2D1Bitmap* bmp;
+
+	bool *layerMoved;
 
 	int rotationAngle;
 	int spritesAccross;
 
-	static string m_FolderPath;
 	int managerIndex;
 	bool isometric;
 
@@ -53,30 +66,26 @@ class SpriteSheet
 	bool animated;
 	int frames;		// number of frames
 	int frameIndex;	// currently used frame
+	float frameTimer;	// time until next frame
 
-public:
-	SpriteSheet(string filename, Graphics* gfx, CollisionType::Type collision = CollisionType::None, bool isometric = false);
+	void Init();
+	void Draw(Graphics* gfx, double frameTime);
+	SpriteSheet(CollisionType::Type collider, Vector2 position, bool *layerMovedVar, bool isIsomtric);
 	~SpriteSheet();
-	
-	static void FolderInit(string spriteFolderPath)
-	{
-		m_FolderPath = spriteFolderPath + "\\";
-	}
-
-	void Draw();
-
-	void MakeAnimated(int frames, int width, int height);
+public:
+	void MakeAnimated(int frames, float animspeed, int width, int height);
 
 	// public variables
-	CollisionType::Type collision;
+	CollisionType::Type collider;
 	Vector2 position;
 	Vector2 origin;
-	Vector2 scale;
+	float scale;
 	Vector2 size;
 	int radius;
 	int layer;
 	bool active;
 	string tag;
+	float animationspeed;
 
 	// currently do not work with animated sprites
 	void Scale(int x, int y);

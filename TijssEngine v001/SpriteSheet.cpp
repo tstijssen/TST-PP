@@ -1,82 +1,25 @@
 #include "SpriteSheet.h"
 
-string SpriteSheet::m_FolderPath;
-smanager::SpriteManager *smanager::SpriteManager::m_Instance = 0;
-
-SpriteSheet::SpriteSheet(string filename, Graphics* gfx, CollisionType::Type collision, bool isometric)
+SpriteSheet::SpriteSheet(CollisionType::Type collider, Vector2 position, bool *layerMovedVar, bool isIsometric)
 {
-	// get instance of singleton and add this sprite to its list
-	managerIndex = smanager::SpriteManager::instance().AddSprite(this);
+	this->position.x = position.x;
+	this->position.y = position.y;
+	this->layerMoved = layerMovedVar;
+	this->collider = collider;
+	this->isometric = isIsometric;
+}
 
-	this->gfx = gfx;
-	bmp = NULL;
-	HRESULT hr;
-	string filePath = m_FolderPath + filename;
-	std::wstring widestr = std::wstring(filePath.begin(), filePath.end());
-
-	// create path for sprite file
-	const wchar_t* finalPath = widestr.c_str();
-
-	// create factory
-	IWICImagingFactory *wicFactory = NULL;
-
-	hr = CoCreateInstance(
-		CLSID_WICImagingFactory,
-		NULL,
-		CLSCTX_INPROC_SERVER,
-		IID_IWICImagingFactory,
-		(LPVOID*)&wicFactory
-	);
-
-
-	IWICBitmapDecoder *wicDecoder = NULL;
-	hr = wicFactory->CreateDecoderFromFilename(
-		finalPath,
-		NULL,
-		GENERIC_READ,
-		WICDecodeMetadataCacheOnLoad,
-		&wicDecoder
-	);
-
-	IWICBitmapFrameDecode* wicFrame = NULL;
-	hr = wicDecoder->GetFrame(0, &wicFrame);
-
-	IWICFormatConverter *wicConverter = NULL;
-	hr = wicFactory->CreateFormatConverter(&wicConverter);
-
-	hr = wicConverter->Initialize(
-		wicFrame,
-		GUID_WICPixelFormat32bppPBGRA,
-		WICBitmapDitherTypeNone,
-		NULL,
-		0.0,
-		WICBitmapPaletteTypeCustom
-	);
-
-	hr = gfx->GetRenderTarget()->CreateBitmapFromWicBitmap(
-		wicConverter,
-		NULL,
-		&bmp
-	);
-
-	if (wicFactory) wicFactory->Release();
-	if (wicDecoder) wicDecoder->Release();
-	if (wicConverter) wicConverter->Release();
-	if (wicFrame) wicFrame->Release();
-
+void SpriteSheet::Init()
+{
 	size.x = bmp->GetSize().width;
 	size.y = bmp->GetSize().height;
+	position.x += size.x / 2;
+	position.y += size.y / 2;
 	spritesAccross = 1;
-	position.x = size.x / 2;
-	position.y = size.y / 2;
-	layer = 0;
-	scale.x = 1;
-	scale.y = 1;
+	scale = 1.0f;
 	radius = size.x / 2;
 	active = true;
 	tag = "";
-	this->collision = collision;
-	this->isometric = isometric;
 }
 
 SpriteSheet::~SpriteSheet()
@@ -87,46 +30,53 @@ SpriteSheet::~SpriteSheet()
 	}
 }
 
-void SpriteSheet::Draw()
+void SpriteSheet::Draw(Graphics* gfx, double frameTime)
 {
-	if (active)
+	// source depends on animated
+	D2D_RECT_F src;
+	if (animated)
 	{
-		// source depends on animated
-		D2D_RECT_F src;
-		if (animated)
+		if (frameTimer > 0.0f)
 		{
-			// advance frame
-			frameIndex = (1 + frameIndex) % frames;
-
-			src = D2D1::RectF(
-				(float)((frameIndex % spritesAccross) * size.x),
-				(float)((frameIndex / spritesAccross) * size.y),
-				(float)((frameIndex % spritesAccross) * size.x) + size.x,
-				(float)((frameIndex / spritesAccross) * size.y) + size.y);
+			frameTimer -= frameTime;
 		}
 		else
 		{
-			src = D2D1::RectF(0.0f, 0.0f, size.x, size.y);
+			// advance frame
+			frameIndex = (1 + frameIndex) % frames;
+			frameTimer = animationspeed;
 		}
-		D2D_RECT_F dest = D2D1::RectF(
-			position.x - size.x / 2, position.y - size.y / 2,
-			position.x + scale.x + size.x / 2, position.y + scale.y + size.y / 2);
 
-		gfx->GetRenderTarget()->SetTransform(D2D1::Matrix3x2F::Rotation(rotationAngle, D2D1::Point2F(position.x, position.y)));
-
-		gfx->GetRenderTarget()->DrawBitmap(bmp,
-			dest,
-			1.0f,
-			D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR,
-			src);
-
-		gfx->GetRenderTarget()->SetTransform(D2D1::Matrix3x2F::Identity());
+		src = D2D1::RectF(
+			(float)((frameIndex % spritesAccross) * size.x),
+			(float)((frameIndex / spritesAccross) * size.y),
+			(float)((frameIndex % spritesAccross) * size.x) + size.x,
+			(float)((frameIndex / spritesAccross) * size.y) + size.y);
 	}
+	else
+	{
+		src = D2D1::RectF(0.0f, 0.0f, size.x, size.y);
+	}
+	D2D_RECT_F dest = D2D1::RectF(
+		position.x - size.x / 2, position.y - size.y / 2,
+		scale + position.x + size.x / 2, scale + position.y + size.y / 2);
+
+	gfx->GetRenderTarget()->SetTransform(D2D1::Matrix3x2F::Rotation(rotationAngle, D2D1::Point2F(position.x, position.y)));
+
+	gfx->GetRenderTarget()->DrawBitmap(bmp,
+		dest,
+		1.0f,
+		D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR,
+		src);
+
+	gfx->GetRenderTarget()->SetTransform(D2D1::Matrix3x2F::Identity());
 }
 
-void SpriteSheet::MakeAnimated(int frames, int width, int height)
+void SpriteSheet::MakeAnimated(int frames, float animspeed, int width, int height)
 {
 	animated = true;
+	animationspeed = animspeed;
+	frameTimer = animspeed;
 	this->frames = frames;
 	size.x = width;
 	size.y = height;
@@ -142,15 +92,7 @@ void SpriteSheet::Move(int x, int y)
 	{
 		this->position.x += x;
 		this->position.y += y;
-		if (collision != CollisionType::None)	// check collisions
-		{
-			if (smanager::SpriteManager::instance().DetectCollisions(managerIndex))// reset move if colliding
-			{
-				this->position.x -= x;
-				this->position.y -= y;
-				return;
-			}
-		}
+		*layerMoved = true;
 	}
 }
 
@@ -159,14 +101,7 @@ void SpriteSheet::MoveX(int x)
 	if (active)
 	{
 		this->position.x += x;
-		if (collision != CollisionType::None)	// check collisions
-		{
-			if (smanager::SpriteManager::instance().DetectCollisions(managerIndex))// reset move if colliding
-			{
-				this->position.x -= x;
-				return;
-			}
-		}
+		*layerMoved = true;
 	}
 }
 
@@ -175,26 +110,21 @@ void SpriteSheet::MoveY(int y)
 	if (active)
 	{
 		this->position.y += y;
-		if (collision != CollisionType::None)	// check collisions
-		{
-			if (smanager::SpriteManager::instance().DetectCollisions(managerIndex))// reset move if colliding
-			{
-				this->position.y -= y;
-				return;
-			}
-		}
+		*layerMoved = true;
 	}
 }
 
 void SpriteSheet::SetPosition(Vector2 pos)
 {
 	position = pos;
+	*layerMoved = true;
 }
 
 void SpriteSheet::SetPosition(int x, int y)
 {
 	position.x = x;
 	position.y = y;
+	*layerMoved = true;
 }
 
 void SpriteSheet::Rotate(int amount)

@@ -66,7 +66,7 @@ namespace nbsdx {
 				}
 			}
 
-			~ThreadPool
+			~ThreadPool()
 			{
 				JoinAll();
 			}
@@ -95,7 +95,7 @@ namespace nbsdx {
 					if (WaitForAll) {
 						WaitAll();
 					}
-					// note that we're done, and wake up any thread that's
+					// done, wake up any thread that's
 					// waiting for a new job
 					bailout = true;
 					job_available_var.notify_all();
