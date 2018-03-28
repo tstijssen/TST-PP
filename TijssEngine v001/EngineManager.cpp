@@ -40,11 +40,11 @@ namespace Tijss
 		m_EngineInst = this;
 	}
 
-	void cEngine::Init(EngineDescription pEngineOptions)
+	void cEngine::Init(cEngineDescription pEngineOptions)
 	{
-		m_Window = pEngineOptions._Window;
-		m_Camera2D = pEngineOptions._Camera2D;
-		m_Camera3D = pEngineOptions._Camera3D;
+		m_Window = pEngineOptions.m_Window;
+		m_Camera2D = pEngineOptions.m_Camera2D;
+		m_Camera3D = pEngineOptions.m_Camera3D;
 
 		//if (!pEngineOptions.Test())
 		//	Log::Error("Engine::Initialize: EngineDescription Failed");
@@ -52,7 +52,7 @@ namespace Tijss
 		// Graphics block
 
 		m_GFX = new cGraphics();
-		m_GFX->Init(m_Window, pEngineOptions._Windowed, pEngineOptions._VSync);
+		m_GFX->Init(m_Window, pEngineOptions.m_Windowed, pEngineOptions.m_VSync);
 		m_Context = m_GFX->GetContext();
 		m_Device = m_GFX->GetDevice();
 
@@ -61,21 +61,21 @@ namespace Tijss
 		//Log::Success("Engine::Initialized.");
 	}
 
-	Camera* Engine::GetActive2DCamera()
+	cCamera* cEngine::GetActive2DCamera()
 	{
-		if (Me)
+		if (m_EngineInst)
 		{
-			if (Me->mCamera2D)
+			if (m_EngineInst->m_Camera2D)
 			{
-				return Me->mCamera2D;
+				return m_EngineInst->m_Camera2D;
 			}
 			else
 			{
-				Log::Error("Engine::GetActive2DCamera - Camera2D is null");
+				//Log::Error("Engine::GetActive2DCamera - Camera2D is null");
 			}
 		}
-		else
-			Log::Error("Engine::GetActive2DCamera - engine is not created.");
+		/*else
+			Log::Error("Engine::GetActive2DCamera - engine is not created.");*/
 
 		return NULL;
 	}

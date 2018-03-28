@@ -5,6 +5,7 @@
 #include "EngineDefines.h"
 #include "Graphics.h"
 #include "Window.h"
+#include "Log.h"
 
 namespace Tijss
 {
@@ -16,7 +17,7 @@ namespace Tijss
 		cEngine();
 		~cEngine();
 
-		void Init();
+		void Init(cEngineDescription pEngineOptions);
 		void Release();
 
 		void SetRootScene();
