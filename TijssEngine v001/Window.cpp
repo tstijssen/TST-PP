@@ -29,7 +29,7 @@ namespace Tijss
 		// check if successful
 		if (!RegisterClassEx(&wc))
 		{
-			// log error?
+			Log::Error("Window::Window: RegisterClassEx(&wc)");
 		}
 	}
 
@@ -39,7 +39,7 @@ namespace Tijss
 		// unregister
 		if (!m_Name.empty() && !UnregisterClassW(m_Name.c_str, m_hInstance))
 		{
-			// log Error?
+			Log::Error("Window::~Window: Could Not Unregister Class.");
 		}
 	}
 
@@ -47,8 +47,7 @@ namespace Tijss
 	{
 		if (m_Created)
 		{
-			// window already initialized
-			return;
+			Log::Error("Window::Create: Window already created!");
 		}
 
 		m_WindowHandle = NULL;
@@ -78,8 +77,7 @@ namespace Tijss
 
 		if (!m_WindowHandle)
 		{
-			// log error
-			return;
+			Log::Error("Window::Window: Window not created!");
 		}
 
 		ShowWindow(m_WindowHandle, SW_SHOW);
@@ -89,7 +87,7 @@ namespace Tijss
 
 		m_Created = true;
 
-		// success!
+		Log::Success("Window created.");
 	}
 
 	bool cWindow::GetRunning()
@@ -107,7 +105,7 @@ namespace Tijss
 		m_Height = height;
 		m_Caption = L"";
 
-		// success
+		Log::Success("Window: selected exist by HWND.");
 	}
 
 	void cWindow::Release()
@@ -116,9 +114,11 @@ namespace Tijss
 		{
 			if (!DestroyWindow(m_WindowHandle))
 			{
-				// error could not destroy window
+				Log::Error("Window::Release: Could Not Destroy Window.");
+				m_WindowHandle = NULL;
 			}
 			m_Created = false;
+			Log::Success("Window - Released");
 		}
 	}
 
@@ -153,7 +153,7 @@ namespace Tijss
 		case WM_CLOSE:
 			{
 				DestroyWindow(hwnd);
-				// success window released
+				Log::Success("Window - Released by WndProc");
 				return 0;
 			}
 

@@ -126,7 +126,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Base2D.cpp" />
+    <ClCompile Include="BaseSprite.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="DefaultShaderBase.cpp" />
+    <ClCompile Include="EngineDefines.cpp" />
     <ClCompile Include="EngineManager.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameController.cpp" />
@@ -136,14 +140,20 @@
     <ClCompile Include="Level1.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneObject.cpp" />
+    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SpriteManager.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Base2D.h" />
+    <ClInclude Include="BaseSprite.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="DefaultShaderBase.h" />
     <ClInclude Include="EngineDefines.h" />
     <ClInclude Include="EngineManager.h" />
     <ClInclude Include="Entity.h" />
@@ -156,7 +166,11 @@
     <ClInclude Include="Level1.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="ObjectPool.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneObject.h" />
+    <ClInclude Include="Shader.h" />
     <ClInclude Include="Sound.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="ThreadPool.h" />

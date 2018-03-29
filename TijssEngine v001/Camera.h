@@ -1,6 +1,7 @@
 #pragma once
 #include "_DllExport.h"
 #include "TypeDefines.h"
+#include "Logger.h"
 #include <d3d11.h>
 #include <xnamath.h>
 

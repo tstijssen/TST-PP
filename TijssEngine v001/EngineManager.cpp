@@ -12,7 +12,7 @@ namespace Tijss
 		}
 		else
 		{
-			// error
+			Log::Error("Engine::GetMe() - engine not created");
 		}
 		return NULL;
 	}
@@ -30,7 +30,7 @@ namespace Tijss
 		m_Window = nullptr;
 		m_Camera2D = nullptr;
 		m_Camera3D = nullptr;
-		//m_RootScene = nullptr;
+		m_RootScene = nullptr;
 
 		if (m_EngineInst)
 		{
@@ -46,8 +46,8 @@ namespace Tijss
 		m_Camera2D = pEngineOptions.m_Camera2D;
 		m_Camera3D = pEngineOptions.m_Camera3D;
 
-		//if (!pEngineOptions.Test())
-		//	Log::Error("Engine::Initialize: EngineDescription Failed");
+		if (!pEngineOptions.Test())
+			Log::Error("Engine::Initialize: EngineDescription Failed");
 
 		// Graphics block
 
@@ -58,7 +58,7 @@ namespace Tijss
 
 		//m_DefaultShaderBase.LoadShaders();
 
-		//Log::Success("Engine::Initialized.");
+		Log::Success("Engine::Initialized.");
 	}
 
 	cCamera* cEngine::GetActive2DCamera()
@@ -71,24 +71,22 @@ namespace Tijss
 			}
 			else
 			{
-				//Log::Error("Engine::GetActive2DCamera - Camera2D is null");
+				Log::Error("Engine::GetActive2DCamera - Camera2D is null");
 			}
 		}
-		/*else
-			Log::Error("Engine::GetActive2DCamera - engine is not created.");*/
+		else
+			Log::Error("Engine::GetActive2DCamera - engine is not created.");
 
 		return NULL;
 	}
 
-
-
-	Camera* Engine::GetActive3DCamera()
+	cCamera* cEngine::GetActive3DCamera()
 	{
-		if (Me)
+		if (m_EngineInst)
 		{
-			if (Me->mCamera3D)
+			if (m_EngineInst->m_Camera3D)
 			{
-				return Me->mCamera3D;
+				return m_EngineInst->m_Camera3D;
 			}
 			else
 			{
@@ -101,13 +99,13 @@ namespace Tijss
 		return NULL;
 	}
 
-	ID3D11Device* Engine::GetDevice()
+	ID3D11Device* cEngine::GetDevice()
 	{
-		if (Me)
+		if (m_EngineInst)
 		{
-			if (Me->Device)
+			if (m_EngineInst->m_Device)
 			{
-				return Me->Device;
+				return m_EngineInst->m_Device;
 			}
 			else
 			{
@@ -120,15 +118,13 @@ namespace Tijss
 		return NULL;
 	}
 
-
-
-	ID3D11DeviceContext* Engine::GetContext()
+	ID3D11DeviceContext* cEngine::GetContext()
 	{
-		if (Me)
+		if (m_EngineInst)
 		{
-			if (Me->Context)
+			if (m_EngineInst->m_Context)
 			{
-				return Me->Context;
+				return m_EngineInst->m_Context;
 			}
 			else
 			{
@@ -141,65 +137,57 @@ namespace Tijss
 		return NULL;
 	}
 
-
-
-	void Engine::SetActiveCamera2D(Camera *inCamera)
+	void cEngine::SetActiveCamera2D(cCamera *inCamera)
 	{
-		mCamera2D = inCamera;
+		m_Camera2D = inCamera;
 	}
 
-
-	void Engine::SetActiveCamera3D(Camera *inCamera)
+	void cEngine::SetActiveCamera3D(cCamera *inCamera)
 	{
-		mCamera3D = inCamera;
+		m_Camera3D = inCamera;
 	}
 
-
-	void Engine::Draw()
+	void cEngine::Draw()
 	{
-		if (mCamera2D)
-			mCamera2D->Update();
+		if (m_Camera2D)
+			m_Camera2D->Update();
 
-		if (mCamera3D)
-			mCamera3D->Update();
+		if (m_Camera3D)
+			m_Camera3D->Update();
 
-		if (mRootScene)
-			mRootScene->Draw();
+		if (m_RootScene)
+			m_RootScene->Draw();
 	}
 
-
-	void Engine::Update()
+	void cEngine::Update()
 	{
-		if (mRootScene)
-			mRootScene->Update();
+		if (m_RootScene)
+			m_RootScene->Update();
 	}
 
-
-	void Engine::Release()
+	void cEngine::Release()
 	{
+		//DefaultShaderBase.ReleaseShaders();
 
-		mDefaultShaderBase.ReleaseShaders();
+		_RELEASE_DELETE(m_GFX);
 
-		_RELEASE_DELETE(mGraphics);
-
-		Context = nullptr;
-		Device = nullptr;
-		mWindow = nullptr;
-		mCamera2D = nullptr;
-		mCamera3D = nullptr;
-		mRootScene = nullptr;
+		m_Context = nullptr;
+		m_Device = nullptr;
+		m_Window = nullptr;
+		m_Camera2D = nullptr;
+		m_Camera3D = nullptr;
+		m_RootScene = nullptr;
 
 		Log::Success("Engine - Released");
 	}
 
-	Engine::~Engine()
+	cEngine::~cEngine()
 	{
-		Me = nullptr;
+		m_EngineInst = nullptr;
 	}
 
-	void Engine::SetRootScene(Scene* pScene)
+	void cEngine::SetRootScene(cScene* pScene)
 	{
-		mRootScene = pScene;
+		m_RootScene = pScene;
 	}
-
 }

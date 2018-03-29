@@ -12,7 +12,7 @@ namespace Tijss
 			m_Instance = this;
 		}
 		else
-			return;	// log error, graphics obj already exists
+			Log::Error("Graphics instance already created!");
 
 		ZeroInit();
 
@@ -44,7 +44,7 @@ namespace Tijss
 	{
 		if (m_Instance == nullptr)
 		{
-			// log error, graphics not created
+			Log::Error("Graphics instance not created");
 			return nullptr;
 		}
 		else
@@ -175,7 +175,7 @@ namespace Tijss
 
 		// Create the depth stencil view
 		hr = m_Device->CreateDepthStencilView(DepthStencilBuffer, 0, &m_DepthStencilView);
-		//if (FAILED(hr))	Log::Error("Graphics::CreateDepthStencilBuffer()");
+		if (FAILED(hr))	Log::Error("Graphics::CreateDepthStencilBuffer()");
 		m_isDepthStencilView = m_DepthStencilView;
 
 		DepthStencilBuffer->Release();
@@ -218,7 +218,7 @@ namespace Tijss
 
 
 
-		//if (FAILED(hr))	Log::Error("Graphics::CreateDeviceAndSwapChain()");
+		if (FAILED(hr))	Log::Error("Graphics::CreateDeviceAndSwapChain()");
 	}
 
 
@@ -266,10 +266,10 @@ namespace Tijss
 		ID3D11Texture2D *pBackBuffer;
 
 		hr = m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID *)&pBackBuffer);
-		//if (FAILED(hr))	Log::Error("Graphics::CreateBackBuffer: SwapChain->GetBuffer");
+		if (FAILED(hr))	Log::Error("Graphics::CreateBackBuffer: SwapChain->GetBuffer");
 
 		hr = m_Device->CreateRenderTargetView(pBackBuffer, NULL, &m_BackBuffer);
-		//if (FAILED(hr))	Log::Error("Graphics::CreateBackBuffer: Device->CreateRenderTargetView");
+		if (FAILED(hr))	Log::Error("Graphics::CreateBackBuffer: Device->CreateRenderTargetView");
 
 		_RELEASE(pBackBuffer)
 
@@ -293,7 +293,7 @@ namespace Tijss
 
 
 		hr = m_Device->CreateBlendState(&blendDesc, &m_BlendState);
-		//if (FAILED(hr))	Log::Error("Graphics::CreateBlendState: Device->CreateBlendState");
+		if (FAILED(hr))	Log::Error("Graphics::CreateBlendState: Device->CreateBlendState");
 
 		float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
 		m_Context->OMSetBlendState(m_BlendState, blendFactor, 0xFFFFFFFF);
@@ -308,7 +308,7 @@ namespace Tijss
 		RasterStateDesc.CullMode = D3D11_CULL_NONE;
 
 		hr = m_Device->CreateRasterizerState(&RasterStateDesc, &m_WireFrameState);
-		//if (FAILED(hr))	Log::Error("Graphics::CreateWireframeState: Device->CreateRasterizerState");
+		if (FAILED(hr))	Log::Error("Graphics::CreateWireframeState: Device->CreateRasterizerState");
 	}
 
 	void cGraphics::CreateRasterState()
@@ -329,7 +329,7 @@ namespace Tijss
 		RasterStateDesc.AntialiasedLineEnable = false; //true;
 
 		hr = m_Device->CreateRasterizerState(&RasterStateDesc, &m_RasterState);
-		//if (FAILED(hr));//	Log::Error("Graphics::CreateRasterState: Device->CreateRasterizerState");
+		if (FAILED(hr))	Log::Error("Graphics::CreateRasterState: Device->CreateRasterizerState");
 
 		m_Context->RSSetState(m_RasterState);
 	}
@@ -344,7 +344,7 @@ namespace Tijss
 	{
 		hr = m_SwapChain->Present(m_VSync, 0);
 		CalcFramerate();
-		//if (FAILED(hr)); //Log::Error("SwapChain->Present( 0, 0 )");
+		if (FAILED(hr)) Log::Error("SwapChain->Present( 0, 0 )");
 
 
 #ifdef _DEBUG
@@ -389,7 +389,7 @@ namespace Tijss
 	void  cGraphics::Release()
 	{
 		hr = m_SwapChain->SetFullscreenState(FALSE, NULL);
-		//if (FAILED(hr));//Log::Error("SwapChain->SetFullscreenState");
+		if (FAILED(hr)) Log::Error("SwapChain->SetFullscreenState");
 
 		_RELEASE(m_BackBuffer)
 		_RELEASE(m_DepthStencilView)

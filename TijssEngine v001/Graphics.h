@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "EngineDefines.h"
 #include "TypeDefines.h"
+#include "Logger.h"
 
 namespace Tijss
 {

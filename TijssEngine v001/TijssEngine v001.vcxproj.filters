@@ -69,6 +69,27 @@
     <ClCompile Include="Logger.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneObject.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseSprite.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultShaderBase.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineDefines.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Base2D.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ThreadPool.h">
@@ -133,6 +154,27 @@
     </ClInclude>
     <ClInclude Include="Logger.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneObject.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseSprite.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultShaderBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Base2D.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

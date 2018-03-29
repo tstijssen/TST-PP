@@ -2,6 +2,7 @@
 // Windows Header Files:
 #include <windows.h>
 #include "_DLLExport.h"
+#include "Logger.h"
 #include <string>
 
 #define WIN32_LEAN_AND_MEAN

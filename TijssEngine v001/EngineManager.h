@@ -5,7 +5,7 @@
 #include "EngineDefines.h"
 #include "Graphics.h"
 #include "Window.h"
-#include "Log.h"
+#include "Logger.h"
 
 namespace Tijss
 {
@@ -20,12 +20,12 @@ namespace Tijss
 		void Init(cEngineDescription pEngineOptions);
 		void Release();
 
-		void SetRootScene();
+		void SetRootScene(cScene* pScene);
 
 		// static stuff
 		static cGraphics*			GetGFX();
 		static cCamera*				GetActive2DCamera();
-		static cCamera*				GetActive2DCamera();
+		static cCamera*				GetActive3DCamera();
 		static ID3D11Device*		GetDevice();
 		static ID3D11DeviceContext* GetContext();
 
@@ -34,7 +34,7 @@ namespace Tijss
 		void SetActiveCamera2D(cCamera* newCamera);
 		void SetActiveCamera3D(cCamera* newCamera);
 
-		void SetScene();
+		void SetScene(cScene *pScene);
 
 		void Update();
 		void Draw();
@@ -51,6 +51,7 @@ namespace Tijss
 		ID3D11DeviceContext	* m_Context;
 
 		// root scene (start)
+		cScene * m_RootScene;
 
 		static cEngine * m_EngineInst;
 

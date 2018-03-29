@@ -63,6 +63,50 @@ namespace Tijss
 		}
 	};
 
+	struct sFloat3
+	{
+		float32 x, y, z;
+
+		inline sFloat3() : x(0), y(0), z(0) {}
+		inline sFloat3(float32 px, float32 py, float32 pz) : x(px), y(py), z(pz) {}
+		inline sFloat3(const sFloat3& p) : x(p.x), y(p.y), z(p.z) {}
+
+		inline void operator() (float32 px, float32 py, float32 pz) { x = px; y = py; z = pz;}
+		inline void operator() (const sFloat3& p) { x = p.x; y = p.y; z = p.z; }
+
+		void operator -= (const sFloat3& rhs)
+		{
+			x -= rhs.x;
+			y -= rhs.y;
+			z -= rhs.z;
+		}
+
+		void operator += (const sFloat3& rhs)
+		{
+			x += rhs.x;
+			y += rhs.y;
+			z += rhs.z;
+		}
+
+		bool operator == (const sFloat3& rhs)
+		{
+			return (
+				x == rhs.x &&
+				y == rhs.y &&
+				z == rhs.z );
+		}
+
+		sFloat3 operator + (const sFloat3& rhs)
+		{
+			return { x + rhs.x, y + rhs.y, z + rhs.z };
+		}
+
+		sFloat3 operator - (const sFloat3& rhs)
+		{
+			return { x - rhs.x, y - rhs.y, z - rhs.z };
+		}
+	};
+
 	struct sFloat4
 	{
 		float32 x, y, z, w;

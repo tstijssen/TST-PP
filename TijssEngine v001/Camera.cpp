@@ -70,8 +70,8 @@ namespace Tijss
 	{
 		if (X2>X1 && Y2>Y1 && ZFar>ZNear)
 			m_ProjMatrix = XMMatrixOrthographicOffCenterLH(X1, X2, Y2, Y1, ZNear, ZFar);
-		//else
-			//Log::Error("Camera::SetOrthoProjection: check parametr's");
+		else
+			Log::Error("Camera::SetOrthoProjection: check parametr's");
 	}
 
 	void cCamera::SetPerspectiveProjection(float FovDEG, float pAspertRatio, float ZNear, float ZFar)
@@ -79,7 +79,7 @@ namespace Tijss
 		if (ZNear == 0.00f)
 		{
 			ZNear += 0.01f;
-			//Log::Warning("Camera::SetPerspectiveProjection: ZNear=0 is bad idea");
+			Log::Warning("Camera::SetPerspectiveProjection: ZNear=0 is bad idea");
 		}
 
 		if (FovDEG<1.0f)
